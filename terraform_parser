@@ -1,0 +1,19 @@
+import json
+
+
+output={}
+
+with open("C:/Users/user/Downloads/terrafoem.json") as file:
+    data = json.load(file)
+    
+for each_resource in data["resources"]:
+    instance_list=each["instances"]
+    
+    for each_instance in instance_list:
+        ami=each_instance["attributes"]["ami"]
+        if each_instance["attributes"]["ami"] not in output:
+            output[str(ami)]={"arn":each_inst["attributes"]["arn"],"private_dns":each_inst["attributes"]["private_dns"],"public_dns":each_inst["attributes"]["public_dns"],"public_ip":each_inst["attributes"]["public_ip"]}
+            
+            
+with open('C:/Users/user/Downloads/result.json', 'w') as json_file:
+  json.dump(output, json_file)
